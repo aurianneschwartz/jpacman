@@ -72,9 +72,13 @@ public class ScorePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        String livesDisplay = "Lives: ";
+        String scoreDisplay = "Score: ";
         for (Player player : scoreLabels.keySet()) {
-            String livesText = "Lives: " + player.getRemainingLives();
+             livesDisplay += player.getRemainingLives();
+             scoreDisplay += player.getScore();
         }
+        g.drawString( scoreDisplay + livesDisplay, getX(), getY());
     }
 
 
