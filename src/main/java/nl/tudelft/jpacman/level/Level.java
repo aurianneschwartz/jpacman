@@ -25,6 +25,10 @@ import nl.tudelft.jpacman.npc.Ghost;
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public class Level {
+    /**
+     * Player's initial position
+     */
+    private final Map<Player, Square> startPosition = new HashMap<>();
 
     /**
      * The board of this level.
@@ -155,6 +159,7 @@ public class Level {
             return;
         }
         players.add(player);
+        startPosition.put(player, player.getSquare());
         Square square = startSquares.get(startSquareIndex);
         player.occupy(square);
         startSquareIndex++;
@@ -372,7 +377,16 @@ public class Level {
             service.schedule(this, interval, TimeUnit.MILLISECONDS);
         }
     }
-
+    /**
+     * Respawns the palyer at the original square after loosing a life
+     */
+    public void respawn(Player player) {
+        Square startSquare = startPosition.get(player);
+        if(startSquare != null) {
+            player.occupy(startSquare);
+            player.setDirection(Direction.EAST);
+        }
+    }
     /**
      * An observer that will be notified when the level is won or lost.
      *

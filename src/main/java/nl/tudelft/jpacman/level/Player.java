@@ -13,7 +13,14 @@ import nl.tudelft.jpacman.sprite.Sprite;
  * @author Jeroen Roosen 
  */
 public class Player extends Unit {
-
+    /**
+     * The amount of lives the player starts with
+     */
+    private static final int TOTAL_LIVES = 3;
+    /**
+     * The amount of lives this player has left.
+     */
+    private int remainingLives;
     /**
      * The amount of points accumulated by this player.
      */
@@ -53,7 +60,9 @@ public class Player extends Unit {
         this.sprites = spriteMap;
         this.deathSprite = deathAnimation;
         deathSprite.setAnimating(false);
+        this.remainingLives = TOTAL_LIVES;
     }
+
 
     /**
      * Returns whether this player is alive or not.
@@ -102,6 +111,26 @@ public class Player extends Unit {
     }
 
     /**
+     * Sets the amount of lives this player has left.
+     *
+     * @param currentLives
+     *            The amount of lives this player has left.
+     */
+    public void setRemainingLives(int currentLives) {
+        this.remainingLives = currentLives;
+    }
+
+    /**
+     * Returns the amount of lives this player has left.
+     *
+     * @return The amount of lives this player has left.
+     */
+    public int getRemainingLives() {
+        return remainingLives;
+    }
+
+
+    /**
      * Returns the amount of points accumulated by this player.
      *
      * @return The amount of points accumulated by this player.
@@ -127,5 +156,23 @@ public class Player extends Unit {
      */
     public void addPoints(int points) {
         score += points;
+    }
+
+    /**
+     * Decrements the amount of lives this player has left.
+     */
+    public void lifeLost()  {
+        remainingLives--;
+        if(remainingLives == 0) {
+            setAlive(false);
+        }
+    }
+
+    /**
+     * Returns whether this player is dead or not.
+     * @return true if the player is dead, false otherwise.
+     */
+    public boolean stillAlive() {
+        return remainingLives > 0;
     }
 }

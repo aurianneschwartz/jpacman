@@ -111,6 +111,26 @@ public abstract class Game implements LevelObserver {
 
     @Override
     public void levelLost() {
-        stop();
+        Player player = getPlayers().get(0);
+        if (player.stillAlive()) {
+            handleRespawn(player);
+        } else {
+            stop();
+        }
     }
+
+    /**
+     * Handles the respawn of the player.
+     *
+     * @param player
+     *            The player that died.
+     */
+    protected void handleRespawn(Player player){
+        Level level = getLevel();
+        level.stop();
+        level.respawn(player);
+        player.setAlive(true);
+        level.start();
+    }
+
 }
