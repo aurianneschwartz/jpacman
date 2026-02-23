@@ -57,6 +57,10 @@ public class Level {
      */
     private boolean inProgress;
 
+    public List<Square> getStartSquares() {
+        return startSquares;
+    }
+
     /**
      * The squares from which players can start this game.
      */

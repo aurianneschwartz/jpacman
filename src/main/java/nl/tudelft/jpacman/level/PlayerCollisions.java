@@ -1,8 +1,14 @@
 package nl.tudelft.jpacman.level;
 
+import nl.tudelft.jpacman.board.Direction;
+import nl.tudelft.jpacman.board.Square;
 import nl.tudelft.jpacman.board.Unit;
+import nl.tudelft.jpacman.game.Game;
 import nl.tudelft.jpacman.npc.Ghost;
 import nl.tudelft.jpacman.points.PointCalculator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple implementation of a collision map for the JPacman player.
@@ -77,9 +83,6 @@ public class PlayerCollisions implements CollisionMap {
         pointCalculator.collidedWithAGhost(player, ghost);
         player.lifeLost();
         player.setKiller(ghost);
-        if(player.stillAlive()){
-            player.setAlive(true);
-        }
     }
 
     /**

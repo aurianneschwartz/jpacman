@@ -163,8 +163,13 @@ public class Player extends Unit {
      */
     public void lifeLost()  {
         remainingLives--;
-        if(remainingLives == 0) {
-            setAlive(false);
+        setAlive(false);
+        deathSprite.setAnimating(true);
+        deathSprite.restart();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+           System.err.println();
         }
     }
 
