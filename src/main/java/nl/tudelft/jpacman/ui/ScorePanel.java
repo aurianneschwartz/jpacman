@@ -1,6 +1,6 @@
 package nl.tudelft.jpacman.ui;
 
-import java.awt.GridLayout;
+import java.awt.*;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +65,18 @@ public class ScorePanel extends JPanel {
             add(scoreLabel);
         }
     }
+
+    /**
+     * Update the player's lives
+     */
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        for (Player player : scoreLabels.keySet()) {
+            String livesText = "Lives: " + player.getRemainingLives();
+        }
+    }
+
 
     /**
      * Refreshes the scores of the players.

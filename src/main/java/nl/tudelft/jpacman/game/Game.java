@@ -132,5 +132,4 @@ public abstract class Game implements LevelObserver {
         player.setAlive(true);
         level.start();
     }
-
 }
