@@ -92,9 +92,15 @@ public class Level {
      */
     public Level(Board board, List<Ghost> ghosts, List<Square> startPositions,
                  CollisionMap collisionMap) {
-        assert board != null;
-        assert ghosts != null;
-        assert startPositions != null;
+        if (board == null) {
+            throw new IllegalArgumentException("Board cannot be null.");
+        }
+        if (ghosts == null) {
+            throw new IllegalArgumentException("Ghosts cannot be null.");
+        }
+        if (startPositions == null) {
+            throw new IllegalArgumentException("Start positions cannot be null.");
+        }
 
         this.board = board;
         this.inProgress = false;
@@ -138,8 +144,12 @@ public class Level {
      *            The player to register.
      */
     public void registerPlayer(Player player) {
-        assert player != null;
-        assert !startSquares.isEmpty();
+        if (startSquares.isEmpty()) {
+            throw new IllegalStateException("No start squares available.");
+        }
+        if (player == null) {
+            throw new IllegalArgumentException("Player cannot be null.");
+        }
 
         if (players.contains(player)) {
             return;
@@ -170,9 +180,15 @@ public class Level {
      *            The direction to move the unit in.
      */
     public void move(Unit unit, Direction direction) {
-        assert unit != null;
-        assert direction != null;
-        assert unit.hasSquare();
+        if (unit == null) {
+            throw new IllegalArgumentException("Unit cannot be null.");
+        }
+        if (direction == null) {
+            throw new IllegalArgumentException("Direction cannot be null.");
+        }
+        if (!unit.hasSquare()) {
+            throw new IllegalStateException("Unit must occupy a square.");
+        }
 
         if (!isInProgress()) {
             return;
@@ -244,7 +260,9 @@ public class Level {
     private void stopNPCs() {
         for (Entry<Ghost, ScheduledExecutorService> entry : npcs.entrySet()) {
             ScheduledExecutorService schedule = entry.getValue();
-            assert schedule != null;
+            if (schedule == null) {
+                throw new IllegalStateException("Schedule must not be null.");
+            }
             schedule.shutdownNow();
         }
     }
@@ -308,7 +326,9 @@ public class Level {
                 }
             }
         }
-        assert pellets >= 0;
+        if (pellets < 0) {
+            throw new IllegalStateException("Pellet count cannot be negative.");
+        }
         return pellets;
     }
 

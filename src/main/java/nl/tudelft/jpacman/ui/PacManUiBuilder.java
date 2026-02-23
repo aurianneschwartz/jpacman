@@ -61,7 +61,9 @@ public class PacManUiBuilder {
      * @return A new Pac-Man UI with the set keys and buttons.
      */
     public PacManUI build(final Game game) {
-        assert game != null;
+        if (game == null) {
+            throw new IllegalArgumentException("Game cannot be null.");
+        }
 
         if (defaultButtons) {
             addStartButton(game);
@@ -78,7 +80,10 @@ public class PacManUiBuilder {
      *            The game to stop.
      */
     private void addStopButton(final Game game) {
-        assert game != null;
+        if (game == null) {
+            throw new IllegalArgumentException("Game cannot be null.");
+        }
+
 
         buttons.put(STOP_CAPTION, game::stop);
     }
@@ -91,7 +96,10 @@ public class PacManUiBuilder {
      *            The game to start.
      */
     private void addStartButton(final Game game) {
-        assert game != null;
+        if (game == null) {
+            throw new IllegalArgumentException("Game cannot be null.");
+        }
+
 
         buttons.put(START_CAPTION, game::start);
     }
@@ -106,9 +114,12 @@ public class PacManUiBuilder {
      * @return The builder.
      */
     public PacManUiBuilder addKey(Integer keyCode, Action action) {
-        assert keyCode != null;
-        assert action != null;
-
+        if (keyCode == null) {
+            throw new IllegalArgumentException("Key code cannot be null.");
+        }
+        if (action == null) {
+            throw new IllegalArgumentException("Action cannot be null.");
+        }
         keyMappings.put(keyCode, action);
         return this;
     }
@@ -123,9 +134,12 @@ public class PacManUiBuilder {
      * @return The builder.
      */
     public PacManUiBuilder addButton(String caption, Action action) {
-        assert caption != null;
-        assert !caption.isEmpty();
-        assert action != null;
+        if (caption == null || caption.isEmpty()) {
+            throw new IllegalArgumentException("Caption cannot be null or empty.");
+        }
+        if (action == null) {
+            throw new IllegalArgumentException("Action cannot be null.");
+        }
 
         buttons.put(caption, action);
         return this;

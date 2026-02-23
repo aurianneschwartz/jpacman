@@ -69,9 +69,15 @@ public class PacManUI extends JFrame {
                     final Map<Integer, Action> keyMappings,
                     ScoreFormatter scoreFormatter) {
         super("JPacman");
-        assert game != null;
-        assert buttons != null;
-        assert keyMappings != null;
+        if (game == null) {
+            throw new IllegalArgumentException("Game cannot be null.");
+        }
+        if (buttons == null) {
+            throw new IllegalArgumentException("Buttons cannot be null.");
+        }
+        if (keyMappings == null) {
+            throw new IllegalArgumentException("Key mappings cannot be null.");
+        }
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
