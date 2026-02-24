@@ -36,9 +36,12 @@ public class SinglePlayerGame extends Game {
      */
     protected SinglePlayerGame(Player player, Level level, PointCalculator pointCalculator) {
         super(pointCalculator);
-
-        assert player != null;
-        assert level != null;
+        if (player == null) {
+            throw new IllegalArgumentException("Player cannot be null.");
+        }
+        if (level == null) {
+            throw new IllegalArgumentException("Level cannot be null.");
+        }
 
         this.player = player;
         this.level = level;
