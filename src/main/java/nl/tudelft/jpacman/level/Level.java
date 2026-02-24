@@ -381,16 +381,7 @@ public class Level {
             service.schedule(this, interval, TimeUnit.MILLISECONDS);
         }
     }
-    /**
-     * Respawns the palyer at the original square after loosing a life
-     */
-    public void respawn(Player player) {
-        Square startSquare = startPosition.get(player);
-        if(startSquare != null) {
-            player.occupy(startSquare);
-            player.setDirection(Direction.EAST);
-        }
-    }
+
     /**
      * An observer that will be notified when the level is won or lost.
      *
