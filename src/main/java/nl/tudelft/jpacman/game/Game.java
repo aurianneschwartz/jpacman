@@ -116,6 +116,7 @@ public abstract class Game implements LevelObserver {
         if (player.stillAlive()) {
             handleRespawn(player);
         }
+        start();
     }
 
     /**
