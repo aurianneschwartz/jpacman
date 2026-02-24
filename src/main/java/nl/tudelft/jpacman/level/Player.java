@@ -165,8 +165,17 @@ public class Player extends Unit {
         remainingLives--;
         if(remainingLives == 0) {
             setAlive(false);
+            setAlive(false);
+            deathSprite.setAnimating(true);
+            deathSprite.restart();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                System.err.println();
+            }
         }
     }
+
     /**
      * Returns whether this player is dead or not.
      * @return true if the player is dead, false otherwise.
